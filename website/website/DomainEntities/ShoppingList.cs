@@ -15,9 +15,9 @@ namespace website.DomainEntities
         public string Name { get; set; }
         public List<Product> Products { get; set; }
 
-        public void ChangeName(int prodId, string newName)
+        public void ChangeName(string newName)
         {
-            Products.Where(x => x.Id == prodId).First().Name = newName;
+            Name = newName;
         }
 
         public void Add(Product prod)
