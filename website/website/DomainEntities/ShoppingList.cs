@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace website.DomainEntities
@@ -14,14 +15,23 @@ namespace website.DomainEntities
         public string Name { get; set; }
         public List<Product> Products { get; set; }
 
+        public void ChangeName(int prodId, string newName)
+        {
+            Products.Where(x => x.Id == prodId).First().Name = newName;
+        }
+
         public void Add(Product prod)
         {
             Products.Add(prod);
         }
 
-        public void Remove(int id)
+        public void Remove(int prodId)
         {
-            Products.Remove(Products.Single(x => x.Id == id));
+            Product p = Products.SingleOrDefault(x => x.Id == prodId);
+            if (p != null)
+                Products.Remove(p);
+            else
+                throw new Exception("Product not found");
         }
     }
 }
