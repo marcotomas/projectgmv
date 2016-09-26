@@ -161,3 +161,4 @@ C:\Users\Marco\Source\Repos\projectgmv\website\website\bin\Microsoft.Owin.Securi
 C:\Users\Marco\Source\Repos\projectgmv\website\website\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Marco\Source\Repos\projectgmv\website\website\obj\Debug\website.dll
 C:\Users\Marco\Source\Repos\projectgmv\website\website\obj\Debug\website.pdb
+C:\Users\Marco\Source\Repos\projectgmv\website\website\obj\Debug\website.csprojResolveAssemblyReference.cache
