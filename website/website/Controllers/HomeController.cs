@@ -15,9 +15,14 @@ namespace website.Controllers
 
 
 
-       public ActionResult addListCard()
+        public ActionResult addListCard()
         {
             return PartialView("shoppingCard");
+        }
+
+        public  ActionResult ListItems()
+        {
+            return View("listItems");
         }
     }
 }

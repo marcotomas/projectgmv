@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="websiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ListProducts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="shopId" Type="int" Nullable="false" />
+    <Property Name="prodId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="126" />
+    <Property Name="bought" Type="bit" />
+  </EntityType>
+  <EntityType Name="ShoppingList">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="126" />
+  </EntityType>
+  <Association Name="FK__ListProdu__prodI__09DE7BCC">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ListProducts" Type="Self.ListProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListProducts">
+        <PropertyRef Name="prodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ListProdu__shopI__08EA5793">
+    <End Role="ShoppingList" Type="Self.ShoppingList" Multiplicity="1" />
+    <End Role="ListProducts" Type="Self.ListProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShoppingList">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListProducts">
+        <PropertyRef Name="shopId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="websiteModelStoreContainer">
+    <EntitySet Name="ListProducts" EntityType="Self.ListProducts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShoppingList" EntityType="Self.ShoppingList" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__ListProdu__prodI__09DE7BCC" Association="Self.FK__ListProdu__prodI__09DE7BCC">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ListProducts" EntitySet="ListProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ListProdu__shopI__08EA5793" Association="Self.FK__ListProdu__shopI__08EA5793">
+      <End Role="ShoppingList" EntitySet="ShoppingList" />
+      <End Role="ListProducts" EntitySet="ListProducts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="websiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ListProducts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shopId" Type="int" Nullable="false" />
+          <Property Name="prodId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="126" />
+          <Property Name="bought" Type="bit" />
+        </EntityType>
+        <EntityType Name="ShoppingList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="126" />
+        </EntityType>
+        <Association Name="FK__ListProdu__prodI__09DE7BCC">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ListProducts" Type="Self.ListProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListProducts">
+              <PropertyRef Name="prodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListProdu__shopI__08EA5793">
+          <End Role="ShoppingList" Type="Self.ShoppingList" Multiplicity="1" />
+          <End Role="ListProducts" Type="Self.ListProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListProducts">
+              <PropertyRef Name="shopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="websiteModelStoreContainer">
+          <EntitySet Name="ListProducts" EntityType="Self.ListProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingList" EntityType="Self.ShoppingList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ListProdu__prodI__09DE7BCC" Association="Self.FK__ListProdu__prodI__09DE7BCC">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ListProducts" EntitySet="ListProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListProdu__shopI__08EA5793" Association="Self.FK__ListProdu__shopI__08EA5793">
+            <End Role="ShoppingList" EntitySet="ShoppingList" />
+            <End Role="ListProducts" EntitySet="ListProducts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="websiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="websiteEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="ListProducts" EntityType="websiteModel.ListProducts" />
+          <EntitySet Name="Product" EntityType="websiteModel.Product" />
+          <EntitySet Name="ShoppingList" EntityType="websiteModel.ShoppingList" />
+          <AssociationSet Name="FK__ListProdu__prodI__09DE7BCC" Association="websiteModel.FK__ListProdu__prodI__09DE7BCC">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ListProducts" EntitySet="ListProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListProdu__shopI__08EA5793" Association="websiteModel.FK__ListProdu__shopI__08EA5793">
+            <End Role="ShoppingList" EntitySet="ShoppingList" />
+            <End Role="ListProducts" EntitySet="ListProducts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ListProducts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shopId" Type="Int32" Nullable="false" />
+          <Property Name="prodId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="websiteModel.FK__ListProdu__prodI__09DE7BCC" FromRole="ListProducts" ToRole="Product" />
+          <NavigationProperty Name="ShoppingList" Relationship="websiteModel.FK__ListProdu__shopI__08EA5793" FromRole="ListProducts" ToRole="ShoppingList" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="126" FixedLength="false" Unicode="false" />
+          <Property Name="bought" Type="Boolean" />
+          <NavigationProperty Name="ListProducts" Relationship="websiteModel.FK__ListProdu__prodI__09DE7BCC" FromRole="Product" ToRole="ListProducts" />
+        </EntityType>
+        <EntityType Name="ShoppingList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="126" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ListProducts" Relationship="websiteModel.FK__ListProdu__shopI__08EA5793" FromRole="ShoppingList" ToRole="ListProducts" />
+        </EntityType>
+        <Association Name="FK__ListProdu__prodI__09DE7BCC">
+          <End Type="websiteModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="websiteModel.ListProducts" Role="ListProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListProducts">
+              <PropertyRef Name="prodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListProdu__shopI__08EA5793">
+          <End Type="websiteModel.ShoppingList" Role="ShoppingList" Multiplicity="1" />
+          <End Type="websiteModel.ListProducts" Role="ListProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListProducts">
+              <PropertyRef Name="shopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="websiteModelStoreContainer" CdmEntityContainer="websiteEntities" >
+          <EntitySetMapping Name="ListProducts">
+            <EntityTypeMapping TypeName="websiteModel.ListProducts">
+              <MappingFragment StoreEntitySet="ListProducts">
+                <ScalarProperty Name="prodId" ColumnName="prodId" />
+                <ScalarProperty Name="shopId" ColumnName="shopId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="websiteModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="bought" ColumnName="bought" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingList">
+            <EntityTypeMapping TypeName="websiteModel.ShoppingList">
+              <MappingFragment StoreEntitySet="ShoppingList">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="websiteModelStoreContainer" CdmEntityContainer="websiteEntities">
+    <EntitySetMapping Name="ListProducts">
+      <EntityTypeMapping TypeName="websiteModel.ListProducts">
+        <MappingFragment StoreEntitySet="ListProducts">
+          <ScalarProperty Name="prodId" ColumnName="prodId" />
+          <ScalarProperty Name="shopId" ColumnName="shopId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="websiteModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="bought" ColumnName="bought" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShoppingList">
+      <EntityTypeMapping TypeName="websiteModel.ShoppingList">
+        <MappingFragment StoreEntitySet="ShoppingList">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

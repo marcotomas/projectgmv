@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="websiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="websiteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ListProducts" EntityType="websiteModel.ListProducts" />
+    <EntitySet Name="Product" EntityType="websiteModel.Product" />
+    <EntitySet Name="ShoppingList" EntityType="websiteModel.ShoppingList" />
+    <AssociationSet Name="FK__ListProdu__prodI__09DE7BCC" Association="websiteModel.FK__ListProdu__prodI__09DE7BCC">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ListProducts" EntitySet="ListProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ListProdu__shopI__08EA5793" Association="websiteModel.FK__ListProdu__shopI__08EA5793">
+      <End Role="ShoppingList" EntitySet="ShoppingList" />
+      <End Role="ListProducts" EntitySet="ListProducts" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ListProducts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="shopId" Type="Int32" Nullable="false" />
+    <Property Name="prodId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="websiteModel.FK__ListProdu__prodI__09DE7BCC" FromRole="ListProducts" ToRole="Product" />
+    <NavigationProperty Name="ShoppingList" Relationship="websiteModel.FK__ListProdu__shopI__08EA5793" FromRole="ListProducts" ToRole="ShoppingList" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="126" FixedLength="false" Unicode="false" />
+    <Property Name="bought" Type="Boolean" />
+    <NavigationProperty Name="ListProducts" Relationship="websiteModel.FK__ListProdu__prodI__09DE7BCC" FromRole="Product" ToRole="ListProducts" />
+  </EntityType>
+  <EntityType Name="ShoppingList">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="126" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ListProducts" Relationship="websiteModel.FK__ListProdu__shopI__08EA5793" FromRole="ShoppingList" ToRole="ListProducts" />
+  </EntityType>
+  <Association Name="FK__ListProdu__prodI__09DE7BCC">
+    <End Type="websiteModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="websiteModel.ListProducts" Role="ListProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListProducts">
+        <PropertyRef Name="prodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ListProdu__shopI__08EA5793">
+    <End Type="websiteModel.ShoppingList" Role="ShoppingList" Multiplicity="1" />
+    <End Type="websiteModel.ListProducts" Role="ListProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShoppingList">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListProducts">
+        <PropertyRef Name="shopId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
