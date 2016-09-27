@@ -1,7 +1,8 @@
-﻿@model website.Models.ProductListModel
+﻿@model website.Models.ShoppingListModel
 
-@using (Html.BeginForm("Buy", "Home", FormMethod.Post))
+@using (Html.BeginForm("RemoveListCard", "Home", FormMethod.Post))
 {
+
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,8 +12,8 @@
                 <h4 class="modal-title">CONFIRMATION</h4>
             </div>
             <div class="modal-body">
-                @Html.HiddenFor(x => Model.Name)
-                <span>Add to shopping list?</span>
+                @Html.HiddenFor(x => x.Name)
+                <span>Remove shopping list?</span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

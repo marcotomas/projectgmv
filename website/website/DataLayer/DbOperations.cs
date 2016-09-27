@@ -10,10 +10,15 @@ namespace website.DataLayer
     {
         public static List<DomainEntities.ShoppingList> AllShoppingLists()
         {
-            List<DomainEntities.ShoppingList> list;
+            List<DomainEntities.ShoppingList> list = new List<DomainEntities.ShoppingList>();
             using (var context = new websiteEntities())
             {
-                list = context.ShoppingList.Select(x => new DomainEntities.ShoppingList(x.name) { Id = x.id}).ToList();
+                int c = context.ShoppingList.Count();
+                var dbList = context.ShoppingList.ToList();
+                foreach (var item in dbList)
+                {
+                    list.Add(new DomainEntities.ShoppingList(item.name) { Id = item.id });
+                }
             }
 
             return list;
@@ -65,7 +70,7 @@ namespace website.DataLayer
 
             using (var context = new websiteEntities())
             {
-                var element = context.ShoppingList.FirstOrDefault(x => x.id == list.Id);
+                var element = context.ShoppingList.FirstOrDefault(x => x.name == list.Name);
 
                 element.name = name;
 
@@ -93,6 +98,38 @@ namespace website.DataLayer
                 }
             }
 
+        }
+
+        public static List<DomainEntities.Product> AllProductList()
+        {
+            List<DomainEntities.Product> list = new List<DomainEntities.Product>();
+            using (var context = new websiteEntities())
+            {
+                int c = context.Product.Count();
+                var dbList = context.Product.ToList();
+                foreach (var item in dbList)
+                {
+                    list.Add(new DomainEntities.Product(item.name) { Id = item.id });
+                }
+            }
+
+            return list;
+        }
+
+        public static void InserProductList(DomainEntities.Product prod, int idListShop)
+        {
+
+            using (var context = new websiteEntities())
+            {
+                ListProducts list = new ListProducts()
+                {
+                    prodId = prod.Id,
+                    shopId = idListShop
+                };
+
+                context.ListProducts.Add(list);
+                context.SaveChanges();
+            }
         }
 
     }

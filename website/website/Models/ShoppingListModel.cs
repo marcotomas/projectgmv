@@ -6,6 +6,9 @@ namespace website.Models
     public class ShoppingListModel
     {
         public string Name { get; set; }
-        public List<Product> Products { get; set; }
+
+        public List<DomainEntities.Product> Products { get; set; }
+
+        public List<DomainEntities.ShoppingList> ShopList { get; set; }
     }
 }

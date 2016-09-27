@@ -1,38 +1,63 @@
-﻿
+﻿@model website.Models.ShoppingListModel
 
 <div class="container">
     <div class="row">
-        <h2 >
+        <h2>
             Shopping List
         </h2>
     </div>
     <div class="row">
         <div class="col-xs-6">
             <div class="col-xs-3">
+
                 <a data-toggle="modal" data-target="#addListModal">+ Add List</a>
             </div>
         </div>
     </div>
     <div class="row" style="margin-top:20px;margin-left:20px">
         <ul>
-            @{ }
-            <li>
-                <a href="@Url.Action("ListItems", "Home")">List1</a>
-                <a class="text-info" style="margin-left:20px" >Edit</a>
-                <a class="text-danger"> Remove</a>
-            </li>
+            @if (Model != null)
+            {
+                if (Model.ShopList.Count > 0)
+                {
+                    foreach (var list in Model.ShopList)
+                    {
+                        <li>
+                            <a href="@Url.Action("ListItems", "Home", new { })">@list.Name</a>
+                            <a class="text-info" style="margin-left:20px" onclick="EditList('@list.Name')">Edit</a>
+                            <a class="text-danger" onclick="RemoveList('@list.Name')"> Remove</a>
+                        </li>
+                    }
+                }
+            }
         </ul>
     </div>
 </div>
 
 <div id="addListModal" class="modal fade">
-    @Html.Partial("shoppingCard")
+
+    @Html.Partial("_AddList")
+
+</div>
+
+<div id="EditListModal" class="modal fade">
+
+</div>
+
+<div id="RemoveListModal" class="modal fade">
+
 </div>
 
 <script>
-    function addList() {
-        $("#addListModal").load('@Url.Action("addListCard", "Home")', function () {
-            $("addListModal").modal('show');
+    function EditList(nameList) {
+        $("#EditListModal").load('@Url.Action("EditListCard", "Home", new { name = "value"})'.replace("value", nameList), function () {
+            $("#EditListModal").modal('show');
+        });
+    }
+
+    function RemoveList(nameList) {
+        $("#RemoveListModal").load('@Url.Action("RemoveListCard", "Home", new { name = "value"})'.replace("value", nameList), function () {
+            $("#RemoveListModal").modal('show');
         });
     }
 </script>

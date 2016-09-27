@@ -228,6 +228,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ProductListModel.cs" />
     <Compile Include="Models\ShoppingListModel.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>DB_layer.tt</DependentUpon>
@@ -312,6 +313,8 @@
     <Content Include="Views\Home\_item.cshtml" />
     <Content Include="Views\Home\listItems.cshtml" />
     <Content Include="Views\Home\_confirmBuy.cshtml" />
+    <Content Include="Views\Home\EditListShop.cshtml" />
+    <Content Include="Views\Home\RemoveList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
